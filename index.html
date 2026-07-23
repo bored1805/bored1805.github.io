@@ -1,6 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eh搜索快捷拼接工具</title>
+    <style>
+        *{box-sizing: border-box;margin: 8px;padding: 0;}
+        .btn-tag{padding:6px 10px;margin:4px;background:#4285f4;color:#fff;border:none;border-radius:4px;}
+        #result{width:100%;min-height:80px;padding:8px;font-size:14px;}
+        .operate button{padding:8px 16px;margin:5px;}
+    </style>
+</head>
 <body>
-<h1>Hello GitHub Pages</h1>
+    <div>
+        <h4>点击标签快速添加：</h4>
+        <!-- 中文按钮映射英文标签，在这里自由增删所有按钮 -->
+        <button class="btn-tag" data-val="female:ahegao">阿黑颜</button>
+        <button class="btn-tag" data-val="female:abortion">堕胎</button>
+        <button class="btn-tag" data-val="female:amputee">截肢</button>
+        <button class="btn-tag" data-val="female:anal">肛交</button>
+        <button class="btn-tag" data-val='female:"anal prolapse$"'>脱肛</button>
+        <button class="btn-tag" data-val="female:bbw">bbw身材</button>
+        <button class="btn-tag" data-val='female:"big nipples$"'>大乳头</button>
+        <button class="btn-tag" data-val='female:"big vagina$"'>大阴道</button>
+        <button class="btn-tag" data-val="female:blackmail">要挟</button>
+        <button class="btn-tag" data-val='female:"blowjob face$"'>口交颜</button>
+        <button class="btn-tag" data-val='female:"body modification$"'>身体改造</button>
+        <button class="btn-tag" data-val='female:"body writing$"'>身体写作</button>
+        <button class="btn-tag" data-val='female:"brain fuck$"'>脑交</button>
+        <button class="btn-tag" data-val="female:cannibalism">食人</button>
+        <button class="btn-tag" data-val='female:"cervix penetration$"'>宫颈穿透</button>
+        <button class="btn-tag" data-val='female:"cervix prolapse$"'>宫颈脱垂</button>
+        <button class="btn-tag" data-val='female:"chinese dress$"'>旗袍</button>
+        <button class="btn-tag" data-val='female:"double penetration$"'>双洞插入</button>
+      <button class="btn-tag" data-val='female:"double anal$"'>双插肛门</button>
+        <button class="btn-tag" data-val='female:"double vaginal$"'>双插阴道</button>
+      
+    </div>
+
+    <div style="margin-top:15px">
+        <h4>最终搜索语句：</h4>
+        <textarea id="result" readonly></textarea>
+    </div>
+
+    <div class="operate">
+        <button onclick="copyText()">一键复制</button>
+        <button onclick="clearAll()">清空全部</button>
+    </div>
+
+    <script>
+        const resInput = document.getElementById('result');
+        // 添加标签点击事件
+        document.querySelectorAll('.btn-tag').forEach(btn=>{
+            btn.onclick = ()=>{
+                let val = btn.dataset.val;
+                let nowText = resInput.value.trim();
+                // 去重：相同标签不重复添加
+                let arr = nowText.split(/\s+/);
+                if(arr.includes(val)) return;
+                resInput.value = nowText + ' ' + val;
+            }
+        })
+        // 一键复制到剪贴板
+        function copyText(){
+            resInput.select();
+            document.execCommand('copy');
+        }
+        // 清空
+        function clearAll(){
+            resInput.value = '';
+        }
+    </script>
 </body>
 </html>
